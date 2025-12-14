@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track order</title>
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAbCAMAAAAqGX2oAAAAP1BMVEX4lBz4lBr8mB/DdRjliBbdgAUsHA0AAAtFKw6BThKbXhUKCgxqQBGuaRb3jwP7unv817P95Mz7yZn5qFL/+PBbhRzxAAAAAnRSTlP/1ooHR6sAAAEhSURBVHgBjFIFgsAgDOMKo7j//63XYueSSSVZYID4Ay//FoAAoDcHwm3BEUippHwUB4ai1sq2ADQai6gQnUdCIA+NBHcEEjFSadFH9N6jgEAR3Rrio4VmRrIOLYgrkES9WaDhV4D3f2E+Wiz+vSAeCwqegAY+rIPSqEkT6FnT9PBxoTQTaOixYTmoD4LJLw/L/JnCEZi5Ql6SB88AcVkcARBvt8fkg16rsAUQLu8n7wUFituB+bDGwEUoUDM6YAHzRpPH5BkSeFDGcnieR92HkZJIJ0s8h5xzKbm2UnOlO5faK9dcNBKkVtogqozaRmvULaSttY8yBYk+547orRT+rFWOY8XMQ6QJjgedjyW/4PtT3RcyPfDbsU+vI5gviFMAAJf0ExyxOjMhAAAAAElFTkSuQmCC">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        #pre-nav {
+            width: 100%;
+            min-height: 7vh; 
+            background-color: black;
+            color: white;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        #main-bg {
+            background-image: url("./order-bg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 50vh;
+            width: 100%;
+            padding-bottom: 50px;
+            position: relative;
+        }
+
+        #navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 90px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        #logo img {
+            height: 40px;
+        }
+
+        #categories {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 25px;
+            font-size: 0.9em;
+        }
+
+        .categories-con {
+            cursor: pointer;
+            color: white;
+            white-space: nowrap;
+        }
+        
+        .categories-con a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .categories-con button {
+            background-color: #F58220;
+            color: #FEF6EF;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .mobile-menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #bg-text {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        #bg-text h1 {
+            color: #fff;
+            font-size: 2.5rem;
+        }
+
+        #order {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            transform: translateY(20px); 
+        }
+
+        #order-img {
+            width: 20%;
+            background-color: #F58220;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        #order-img img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        #order-con {
+            width: 80%;
+            padding: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .btn1 button {
+            padding: 12px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn1 button:hover {
+            background-color: #f0f0f0;
+            border-color: #bbb;
+        }
+
+        #order-con input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            background-color: #F4F4F4;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            outline: none;
+            min-width: 200px;
+        }
+
+        .btn2 button {
+            background-color: #F58220;
+            color: white;
+            height: 45px;
+            width: 45px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #support {
+            margin-top: 80px;
+            padding: 40px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #support h2 { font-size: 1.8rem; color: #333; }
+        #support p { color: #666; }
+
+        #complain button {
+            background-color: #F58220;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            border: none;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        #title-1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        #faqs {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto 50px auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        #section {
+            width: 30%;
+        }
+
+        .shipment, .payment {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .shipment {
+            background-color: #F58220;
+            color: white;
+        }
+
+        .shipment button { background: none; border: none; cursor: pointer; }
+
+        .payment {
+            background-color: #e5e7eb;
+            color: #333;
+        }
+
+        #solutions {
+            width: 70%;
+        }
+
+        .sol-txt {
+            background-color: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        
+        .sol-txt p { font-size: 0.95em; color: #333; }
+
+        #pre-footer img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .footer-bg {
+            background-color: #313131;
+            color: #D1D5DB;
+            padding: 50px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            width: 23%;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 10px; }
+        .footer-column a { color: #9CA3AF; text-decoration: none; font-size: 0.9em; }
+        .footer-column-title { color: white; margin-bottom: 20px; font-size: 1.1em; }
+        
+        .contact-item, .contact-item a { display: flex; gap: 10px; align-items: center; color: #D1D5DB; text-decoration: none; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons svg { width: 24px; fill: white; }
+
+        .copyright-bg {
+            background-color: black;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 960px) {
+            #navbar { width: 95%; }
+            #categories { display: none; }
+            .mobile-menu-icon { display: block; } 
+            #order {
+                flex-direction: column;
+                margin-top: 0;
+            }
+
+            #order-img {
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+                padding: 15px;
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            #order-img img { width: 30px; margin-bottom: 0; }
+            #order-img h3 { font-size: 1.1em; }
+
+            #order-con {
+                width: 100%;
+                border-radius: 0 0 10px 10px;
+                justify-content: center;
+            }
+
+            .btn1 { width: 30%; }
+            
+            #faqs { flex-direction: column; }
+            #section { width: 100%; display: none; } 
+            #solutions { width: 100%; }
+
+            .footer-column { width: 48%; }
+        }
+
+        @media (max-width: 600px) {
+            #pre-nav { font-size: 0.8em; padding: 10px; }
+            
+            #bg-text h1 { font-size: 1.8rem; margin-top: 20px; }
+
+            #order-con {
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .btn1 { width: 32%; } 
+            .btn1 button { padding: 10px 5px; font-size: 0.8em; }
+
+            #order-con input { width: 100%; margin-top: 10px; }
+
+            .btn2 { width: 100%; }
+            .btn2 button { width: 100%; }
+
+            .footer-column { width: 100%; text-align: left; }
+
+            #section { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="pre-nav">
+        <div class="pre-nav-content">Attention: Please be aware that there are currently fraudulent messages and emails being sent to individual/franchisee prospects in an attempt to scam them.</div>
+    </div>
+
+    <div id="main-bg">
+        <div id="navbar">
+            <div id="logo">
+                <a href="index.html"><img src="https://www.xpressbees.com/images/whiteLogo.webp" alt="Xpressbees Logo"></a>
+            </div>
+            
+            <div class="mobile-menu-icon">
+                <svg viewBox="0 0 100 80" width="30" height="30" fill="white">
+                    <rect width="100" height="15"></rect>
+                    <rect y="30" width="100" height="15"></rect>
+                    <rect y="60" width="100" height="15"></rect>
+                </svg>
+            </div>
+
+            <div id="categories">
+                <div class="categories-con"><a href="#">Services</a></div>
+                <div class="categories-con"><a href="#">About Us</a></div>
+                <div class="categories-con"><a href="#">Careers</a></div>
+                <div class="categories-con"><a href="#">Contact Us</a></div>
+                <div class="categories-con"><a href="#">Partner</a></div>
+                <div class="categories-con"><a href="#">Media</a></div>
+                <div class="categories-con"><a href="login.html">Login</a></div>
+                <div class="categories-con"><a href="order.html"><button>Track Shipment</button></a></div>
+            </div>
+        </div>
+
+        <div id="bg-text">
+            <h1>Track Shipment</h1>
+        </div>
+
+        <div id="order">
+            <div id="order-img">
+                <img src="https://www.xpressbees.com/images/trackTitleImg.svg">
+                <h3>Track Your Shipment</h3>
+            </div>
+            <div id="order-con">
+                <div class="btn1"><button>Mobile No.</button></div>
+                <div class="btn1"><button>AWB No.</button></div>
+                <div class="btn1"><button>Order ID</button></div>
+                
+                <input type="text" placeholder="Enter Mobile No.">
+                
+                <div class="btn2"><button>&#10095;</button></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="support">
+        <div id="title"><h2>Need further Support?</h2></div>
+        <div id="query"><p>Raise a query below and our representative will get in touch with you shortly</p></div>
+        <div id="complain"><button>Customer complaints</button></div>
+    </div>
+
+    <div id="title-1"><h1>FAQs</h1></div>
+
+    <div id="faqs">
+        <div id="section">
+            <div class="shipment">
+                <p>Shipment Tracking and Customer Support</p>
+                <button><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><path fill="#fff" d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke="#000" stroke-linecap="round" stroke-width="3" d="m21 33l9-9l-9-9"/></svg></button>
+            </div>
+            <div class="payment">
+                <p>Payment and Refund related issues</p>
+            </div>
+        </div>
+
+        <div id="solutions">
+            <div class="sol-txt">
+                <p>How can I track my shipment?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+            <div class="sol-txt">
+                <p>Why is my shipment misrouted? How to solve this issue?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+            <div class="sol-txt">
+                <p>I haven't received my shipment and it is showing delivered?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+            <div class="sol-txt">
+                <p>How can I change my delivery address?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+            <div class="sol-txt">
+                <p>Can I re-schedule my date of delivery delivery?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+            <div class="sol-txt">
+                <p>Can someone else receive my shipment if I'm not available?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+             <div class="sol-txt">
+                <p>What are the steps for self-collection of my shipment?</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7" viewBox="0 0 16 7"><path fill="#000" d="M8 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71s.51-.2.71 0l4.15 4.15l4.14-4.14c.2-.2.51-.2.71 0s.2.51 0 .71l-4.5 4.5c-.1.1-.23.15-.35.15Z"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="pre-footer">
+        <img src="https://www.xpressbees.com/images/FooterImg.webp">
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-bg">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="https://www.xpressbees.com/images/whiteLogo.webp" alt="XpressBees Logo">
+                </div>
+                <div class="footer-links-grid">
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Get In Touch</h4>
+                        <ul>
+                            <li>
+                                <div class="contact-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z" stroke-width="0.7" stroke="#FFFFFF"/></svg>
+                                    <span>+91 (020) 4911 6100</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="social-icons">
+                                    <a href="#" aria-label="Facebook">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" aria-label="X">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.25 2.25h6.58l4.613 6.06L18.244 2.25zM17.06 19.75h1.57l-6.8-9.08L5.3 4.25H3.73l6.59 8.84 6.74 6.66z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" aria-label="LinkedIn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.783 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" aria-label="Instagram">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.227-1.667 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.667-4.771 4.919-4.919 1.266.058 1.646.07 4.85.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.058 1.281-.072 1.689-.072 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.281.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zM12 6.865c-2.834 0-5.135 2.301-5.135 5.135s2.301 5.135 5.135 5.135 5.135-2.301 5.135-5.135S14.834 6.865 12 6.865zm0 8.27c-1.728 0-3.135-1.407-3.135-3.135s1.407-3.135 3.135-3.135 3.135 1.407 3.135 3.135-1.407 3.135-3.135 3.135zm4.938-8.27c-.798 0-1.445.647-1.445 1.445s.647 1.445 1.445 1.445 1.445-.647 1.445-1.445-.647-1.445-1.445-1.445z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-bg">
+            <p>Copyright 2023 @Busybees Logistics Solutions Pvt. Ltd.</p>
+        </div>
+    </footer>
+</body>
+</html>

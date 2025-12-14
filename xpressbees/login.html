@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xpressbees Login</title>
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAbCAMAAAAqGX2oAAAAP1BMVEX4lBz4lBr8mB/DdRjliBbdgAUsHA0AAAtFKw6BThKbXhUKCgxqQBGuaRb3jwP7unv817P95Mz7yZn5qFL/+PBbhRzxAAAAAnRSTlP/1ooHR6sAAAEhSURBVHgBjFIFgsAgDOMKo7j//63XYueSSSVZYID4Ay//FoAAoDcHwm3BEUippHwUB4ai1sq2ADQai6gQnUdCIA+NBHcEEjFSadFH9N6jgEAR3Rrio4VmRrIOLYgrkES9WaDhV4D3f2E+Wiz+vSAeCwqegAY+rIPSqEkT6FnT9PBxoTQTaOixYTmoD4LJLw/L/JnCEZi5Ql6SB88AcVkcARBvt8fkg16rsAUQLu8n7wUFituB+bDGwEUoUDM6YAHzRpPH5BkSeFDGcnieR92HkZJIJ0s8h5xzKbm2UnOlO5faK9dcNBKkVtogqozaRmvULaSttY8yBYk+547orRT+rFWOY8XMQ6QJjgedjyW/4PtT3RcyPfDbsU+vI5gviFMAAJf0ExyxOjMhAAAAAElFTkSuQmCC">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: #F5F5F5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background-color: white;
+            width: 90%;
+            max-width: 1100px;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .image-section {
+            width: 55%;
+            position: relative;
+            background-color: #eee;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+        }
+
+        .form-section {
+            width: 45%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-box {
+            margin-bottom: 30px;
+        }
+
+        .logo-box img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .welcome-text {
+            margin-bottom: 40px;
+        }
+
+        .welcome-text h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .welcome-text p {
+            color: #838383;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .action-box {
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #F58220;
+            color: white;
+            height: 50px;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background-color: #d96e15;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .links-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .links-box a {
+            text-decoration: none;
+            color: #F58220;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .links-box a:hover {
+            color: #d96e15;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 960px) {
+            .login-container {
+                height: auto; 
+                min-height: 60vh;
+            }
+            
+            .image-section {
+                width: 45%;
+            }
+            
+            .form-section {
+                width: 55%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .login-container {
+                flex-direction: column; 
+                width: 90%;
+                height: auto;
+                min-height: auto;
+                padding-bottom: 40px;
+            }
+
+            .image-section {
+                display: none; 
+            }
+
+            .form-section {
+                width: 100%;
+                padding: 40px 20px;
+            }
+
+            .logo-box img {
+                max-width: 150px;
+            }
+
+            .welcome-text h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .welcome-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="image-section">
+            <img src="./login.png" alt="Logistics Background">
+        </div>
+
+        <div class="form-section">
+            <div class="logo-box">
+                <img src="https://www.xpressbees.com/images/blackLogo.webp" alt="Xpressbees Logo">
+            </div>
+
+            <div class="welcome-text">
+                <h1>Welcome</h1>
+                <p>Xpressbees Client Portal</p>
+            </div>
+
+            <div class="action-box">
+                <button type="button">Sign in</button>
+            </div>
+
+            <div class="links-box">
+                <div>Register <a href="#">Here</a> for Cross-border Logistics</div>
+                <div>Register <a href="#">Here</a> for Cargo Retail Business</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

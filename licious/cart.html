@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABJElEQVQ4jaWTL0/DUBTFDwuKmX6EluAXBAG1FJCIGb4BmgzBFyAkCMzKJ9jmEaCYRLBAMCsZvk0Q+yMQy0io+iFKS3ntQheOu+edc9/Ju/dJBgAX8ICAHwyANmCb+qzRAlr8jRZgFZn9EuZsIivboMzNuSSJ2TZP5vOPnLqIA1wBHZM9Pjnl/OIyrSeTKQeNQx6fnk2ptyqpZj7ozvaW1h0nravVNe3vuXKc3BAaKwALR1MClf+YkwZhlhhdXSsKxzlhFI417fZM2q9Ius0y1dqGXnebmnZ7mt37er950NtZWy+bR4qCXGM/Wd1f+AxGDN0mfdXpq87QbTLp3BWN0ZYkEe/+svDSHMSrPFjC7LPgP5RJ4uXMRiObeDuziYJvo2vqvwAb3z2ZbvQqAQAAAABJRU5ErkJggg==">
+
+    <style>
+        body, div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Arial', sans-serif;
+            color: #333;
+        }
+
+        body {
+            background-color: #f0f2f5; 
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .summary-container {
+            width: 400px;
+            max-width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            position: relative; 
+            padding-bottom: 80px; 
+            overflow: hidden;
+        }
+
+        .summary-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .banner {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .banner-green {
+            background-color: #4b830d; 
+            color: #ffffff;
+        }
+
+        .banner-congrats {
+            background-color: #ffffff;
+            color: #4b830d;
+            border: 1px dashed #4b830d;
+            margin: 15px;
+            border-radius: 8px;
+        }
+
+        .cart-item {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 0 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .item-number {
+            font-size: 13px;
+            font-weight: 500;
+            color: #777;
+            border: 1px solid #ddd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-right: 10px;
+            height: fit-content;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .item-tag {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 5px 8px;
+            border-radius: 6px;
+            background-color: #fff;
+            margin-right: 10px;
+        }
+
+        .item-price {
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .item-current-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D9232D; 
+            margin-right: 8px;
+        }
+
+        .item-old-price {
+            font-size: 14px;
+            color: #777;
+            text-decoration: line-through;
+        }
+        
+        .item-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 22px;
+            color: #777;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .item-quantity-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #D9232D;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #D9232D;
+            cursor: pointer;
+        }
+
+        .quantity-count {
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            border-left: 1px solid #D9232D;
+            border-right: 1px solid #D9232D;
+        }
+
+        .bill-details {
+            padding: 20px 15px 30px 15px;
+            margin: 15px 15px 0 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .bill-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .bill-label {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .bill-label-desc {
+            font-size: 13px;
+            color: #4b830d; 
+            font-weight: 500;
+        }
+
+        .bill-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .bill-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .bill-total-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        .bill-total-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D9232D;
+        }
+
+        .checkout-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 15px 20px;
+            border-top: 1px solid #f0f0f0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-total {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-total-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-right: 10px;
+        }
+
+        .footer-info-icon {
+            font-size: 16px;
+            color: #777;
+            cursor: pointer;
+        }
+        
+        .checkout-button {
+            padding: 14px 25px;
+            background-color: #D9232D;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="summary-container">
+
+        <div class="summary-header">
+            Order Summary
+        </div>
+        
+        <div class="banner banner-green">
+            Free delivery on all orders above ₹499
+        </div>
+        
+        <div class="banner banner-congrats">
+            Congratulations! You've saved ₹33
+        </div>
+
+        <div class="cart-item">
+            <div class="item-number">1</div>
+            <div class="item-details">
+                <div class="item-title">Chicken Curry Cut - Large Pieces</div>
+                <div class="item-tag">500gms</div>
+                <div class="item-price">
+                    <div class="item-current-price">₹ 160</div>
+                    <div class="item-old-price">₹ 193</div>
+                </div>
+            </div>
+            <div class="item-close">&times;</div>
+            
+            <div class="item-quantity-wrapper">
+                <div class="item-quantity">
+                    <div class="quantity-btn">-</div>
+                    <div class="quantity-count">1</div>
+                    <div class="quantity-btn">+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bill-details">
+            <div class="bill-title">Bill Details</div>
+            
+            <div class="bill-row">
+                <div class="bill-label">Subtotal</div>
+                <div class="bill-value">160</div>
+            </div>
+            <div class="bill-row">
+                <div class="bill-label">Delivery Charge</div>
+                <div class="bill-value">39</div>
+            </div>
+            <div class="bill-row">
+                <div class="bill-label bill-label-desc">Free delivery on all orders above ₹499</div>
+            </div>
+            
+            <div class="bill-total-row">
+                <div class="bill-total-label">Total</div>
+                <div class="bill-total-value">₹ 199</div>
+            </div>
+        </div>
+        
+        <div class="checkout-footer">
+            <div class="footer-total">
+                <div class="footer-total-text">Total : ₹ 199</div>
+                <div class="footer-info-icon"><i class="fa-solid fa-circle-info"></i></div>
+            </div>
+            <div class="checkout-button">
+                Proceed to Checkout
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

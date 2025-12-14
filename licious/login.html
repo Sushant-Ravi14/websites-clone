@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABJElEQVQ4jaWTL0/DUBTFDwuKmX6EluAXBAG1FJCIGb4BmgzBFyAkCMzKJ9jmEaCYRLBAMCsZvk0Q+yMQy0io+iFKS3ntQheOu+edc9/Ju/dJBgAX8ICAHwyANmCb+qzRAlr8jRZgFZn9EuZsIivboMzNuSSJ2TZP5vOPnLqIA1wBHZM9Pjnl/OIyrSeTKQeNQx6fnk2ptyqpZj7ozvaW1h0nravVNe3vuXKc3BAaKwALR1MClf+YkwZhlhhdXSsKxzlhFI417fZM2q9Ius0y1dqGXnebmnZ7mt37er950NtZWy+bR4qCXGM/Wd1f+AxGDN0mfdXpq87QbTLp3BWN0ZYkEe/+svDSHMSrPFjC7LPgP5RJ4uXMRiObeDuziYJvo2vqvwAb3z2ZbvQqAQAAAABJRU5ErkJggg==">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f7f7f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #bg-img {
+            width: 900px;
+            max-width: 1200px;
+            height: 600px;
+            background-image: url('https://www.licious.in/image/rebranding/jpg/user-login-new.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #login {
+            width: 380px;
+            height: 100%;
+            background-color: white;
+            border-radius: 0 8px 8px 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #con-head {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #content > div:nth-child(2) { 
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #country-code {
+            width: 80px; 
+            height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            padding-left: 15px;
+            background-color: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        #country-code img {
+            height: 16px;
+        }
+
+        #mobile-number {
+            flex-grow: 1;
+            height: 48px;
+            padding: 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 0 4px 4px 0;
+            border-left: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #send-otp {
+            width: 100%;
+            height: 48px;
+            background-color: #D9232D;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #login-footer {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #777;
+            text-align: center;
+        }
+
+        #login-footer a {
+            color: #D9232D;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (min-width: 720px) and (max-width: 840px) {
+            #bg-img {
+                width: 90vw;
+                height: 70vh;
+                justify-content: center;
+            }
+            
+            #login {
+                width: 320px;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            }
+            
+            #con-head {
+                font-size: 22px;
+            }
+        }
+
+        @media (min-width: 360px) and (max-width: 420px) {
+            body {
+                background-color: white;
+                padding: 20px 0;
+                align-items: flex-start;
+            }
+            
+            #bg-img {
+                width: 90vw;
+                height: auto;
+                background-image: none;
+                box-shadow: none;
+                border-radius: 0;
+                display: block;
+            }
+            
+            #login {
+                width: 100%;
+                height: auto;
+                padding: 30px 20px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            
+            #con-head {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            #login-footer {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-img">
+        <div id="login">
+            <div id="content">
+                <div><h3 id="con-head">Sign In/Sign Up</h3></div>
+                <div>
+                    <div id="country-code">
+                        <span>+91</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSORXQ6ZEMrcZMUJpP0WGbCSwaLy88mesKPmdnxs76lecBP20Pb5UWmBbYEK8rM4nfwkjlInWmc6RcEFZmBJNZAT1xi3QcCR5UyBOk_qg&s=10" alt="dropdown">
+                    </div>
+                    <input type="tel" id="mobile-number" placeholder="Enter Mobile Number">
+                </div>
+                <button id="send-otp">SEND OTP</button>
+                <div id="login-footer">
+                    <p>By continuing you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
+                    <p>Having trouble logging in? <a href="#">Get Help</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
